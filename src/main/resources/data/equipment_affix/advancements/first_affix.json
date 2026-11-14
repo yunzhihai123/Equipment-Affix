@@ -1,0 +1,22 @@
+{
+  "parent": "equipment_affix:root",
+  "display": {
+    "icon": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "title": {
+      "translate": "advancements.equipment_affix.first_affix.title"
+    },
+    "description": {
+      "translate": "advancements.equipment_affix.first_affix.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

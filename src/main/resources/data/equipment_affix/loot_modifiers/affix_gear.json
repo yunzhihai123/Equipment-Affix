@@ -1,0 +1,9 @@
+{
+  "type": "equipment_affix:affix_gear",
+  "conditions": [
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 1.0
+    }
+  ]
+}

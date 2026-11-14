@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:trimmable_armor",
+    "minecraft:elytra",
+    "minecraft:turtle_helmet"
+  ]
+}

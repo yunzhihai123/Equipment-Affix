@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "equipment_affix:block/upgrade_table_top",
+    "front": "equipment_affix:block/upgrade_table_front",
+    "side": "equipment_affix:block/upgrade_table_side"
+  }
+}

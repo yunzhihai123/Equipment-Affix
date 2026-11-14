@@ -1,0 +1,118 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '6.0.54'
+}
+
+version = '1.0.0'
+group = 'com.equipmentaffix'
+
+base {
+    archivesName = 'equipment_affix'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+
+    runs {
+        client {
+            workingDirectory project.file('run-client')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                equipment_affix {
+                    source sourceSets.main
+                }
+            }
+        }
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--nogui'
+            mods {
+                equipment_affix {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+repositories {
+    // Mojang's library repository serves the Minecraft libraries directly and
+    // avoids the signed CDN redirects used by the BMCLAPI mirror.
+    maven {
+        name = 'MojangLibraries'
+        url = 'https://libraries.minecraft.net/'
+    }
+    // The BMCLAPI mirror serves FancyModLoader jars but not their POM metadata.
+    // Resolve that one group as artifacts so Gradle does not reject it.
+    maven {
+        name = 'BMCLAPIArtifacts'
+        url = 'https://bmclapi2.bangbang93.com/maven/'
+        content {
+            includeGroup 'net.neoforged.fancymodloader'
+        }
+        metadataSources {
+            artifact()
+        }
+    }
+    maven {
+        name = 'BMCLAPI'
+        url = 'https://bmclapi2.bangbang93.com/maven/'
+    }
+    maven {
+        name = 'BlameJared'
+        url = 'https://maven.blamejared.com/'
+    }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft 'net.neoforged:forge:1.20.1-47.1.106'
+    compileOnly fg.deobf('mezz.jei:jei-1.20.1-forge:15.20.0.135')
+    runtimeOnly fg.deobf('mezz.jei:jei-1.20.1-forge:15.20.0.135')
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version: '1.20.1',
+            forge_version    : '47.1.106',
+            mod_id           : 'equipment_affix',
+            mod_name         : 'Equipment Affix',
+            mod_version      : project.version,
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml']) {
+        expand replaceProperties
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes([
+                'Specification-Title'     : 'equipment_affix',
+                'Specification-Vendor'    : 'equipmentaffix',
+                'Specification-Version'   : '1',
+                'Implementation-Title'    : project.name,
+                'Implementation-Version'  : project.version,
+                'Implementation-Vendor'   : 'equipmentaffix',
+        ])
+    }
+    finalizedBy 'reobfJar'
+}

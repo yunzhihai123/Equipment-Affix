@@ -1,0 +1,22 @@
+{
+  "parent": "equipment_affix:first_upgrade",
+  "display": {
+    "icon": {
+      "item": "minecraft:diamond"
+    },
+    "title": {
+      "translate": "advancements.equipment_affix.breakthrough.title"
+    },
+    "description": {
+      "translate": "advancements.equipment_affix.breakthrough.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

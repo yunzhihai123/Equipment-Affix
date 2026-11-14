@@ -1,0 +1,22 @@
+{
+  "parent": "equipment_affix:first_affix",
+  "display": {
+    "icon": {
+      "item": "minecraft:echo_shard"
+    },
+    "title": {
+      "translate": "advancements.equipment_affix.reforge.title"
+    },
+    "description": {
+      "translate": "advancements.equipment_affix.reforge.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
